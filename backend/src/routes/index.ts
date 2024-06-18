@@ -1,14 +1,12 @@
-import { Express, Router } from 'express';
-import { di } from '../di';
-import TestController from '../controllers/test.controller';
-import TestService from '../services/test.service';
+import { Express } from 'express';
+import musicRoutes from './music.routes';
+import playlistRoutes from './playlist.routes';
+import podcastRoutes from './podcast.routes';
 
-const router = Router();
 const prefix = '/api';
 
 export default (app: Express) => {
-  app.use(
-    prefix,
-    new TestController(router, di.getService(TestService)).router
-  );
+  app.use(prefix, musicRoutes);
+  app.use(prefix, playlistRoutes);
+  app.use(prefix, podcastRoutes);
 };
